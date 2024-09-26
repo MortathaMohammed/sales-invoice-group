@@ -10,6 +10,6 @@ This repository contains two print formats for sales invoices.
 2. **Grouped Sales Invoice without Details**  
    [Download the PDF](https://github.com/your-username/your-repo/raw/main/print_sales_invoice_grouped_only.pdf)
 
-   ![Grouped Sales Invoice without Details](https://github.com/user-attachments/assets/5590e07f-7305-416b-b6b7-78fe8219bae5)
+   ![Grouped Sales Invoice without Details](https://github.com/user-attachments/assets/265f5559-ca4c-44a3-86cb-a513aeedab5d)
 
 Both formats allow for grouping of items, and one includes additional details for each item while the other only shows the group summary.
