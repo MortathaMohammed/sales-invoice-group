@@ -1,0 +1,189 @@
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+
+    h1,
+    h2,
+    h3 {
+        text-align: center;
+        color: #000;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+
+    /* Header and Footer */
+    .header,
+    .footer {
+        text-align: center;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 5px;
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        border-top: 2px solid #000;
+        padding: 10px;
+    }
+
+    .footer img {
+        height: 30px;
+        width: auto;
+    }
+
+    .header img {
+        height: 120px;
+        width: 100%;
+    }
+
+    /* Content Section */
+    .content {
+
+        margin-top: 15px;
+        margin-bottom: 40px;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+    }
+
+    .info {
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    /* Invoice Information */
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    .info-box {
+        flex: 1;
+        padding: 5px;
+    }
+
+    .info-box p {
+        margin: 5px 0;
+    }
+
+    /* Item Table Section */
+    .item-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: flex-start;
+    }
+
+    .item-section {
+        flex: 1 1 45%;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+    }
+
+    .full-width {
+        flex: 1 1 100%;
+    }
+
+    .group-name {
+        font-size: 13px;
+        color: gray;
+        margin-bottom: 3px;
+        display: block;
+    }
+
+    /* Table Styles */
+    table {
+        width: 100%;
+        margin-top: 10px;
+        font-size: 10px;
+        border-collapse: collapse;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    th {
+        color: gray;
+        font-size: 12px;
+        border-top: 2px solid #f3f3f3;
+    }
+
+    td {
+        padding: 6px;
+        text-align: center;
+        color: #000;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(245, 245, 245, 0.8);
+    }
+
+    @media print {
+        .header {
+            position: relative;
+            top: 0;
+            width: 100%;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .item-section {
+            page-break-inside: avoid;
+        }
+    }
+
+    /* Style for the summary section */
+    .summary {
+        font-size: 12px;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .summary .left-column,
+    .summary .right-column {
+        width: 48%;
+    }
+
+    .summary p {
+        margin: 5px 0;
+    }
+
+    .summary p strong {
+        color: gray;
+        font-weight: bold;
+    }
+
+    .bottom-space {
+        margin-bottom: 60px;
+        /* Ensures space between content and footer */
+    }
+
+    strong {
+        color: gray;
+    }

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <img src="your header path" alt="Header Logo">
+    </div>
+
+    <!-- Content Section -->
+    <div class="content">
+
+        <!-- Invoice Info -->
+        <div class="info-row">
+            <div class="info-box">
+                <p><strong>Customer Name:</strong> {{ doc.customer_name }}</p>
+            </div>
+            <div class="info-box">
+                <p><strong>Invoice Date:</strong> {{ doc.posting_date }}</p>
+            </div>
+            <div class="info-box">
+                <p><strong>Invoice Number:</strong> {{ doc.name }}</p>
+            </div>
+            <div class="info-box">
+                <p><strong>Due Date:</strong> {{ doc.due_date }}</p>
+            </div>
+        </div>
+
+        <!-- Sales Invoice Items Grouped by Item Group -->
+        <div class="item-container">
+            {% set groups = {} %}
+            {% for item in doc.items %}
+            {% if item.item_group in groups %}
+            {% set _ = groups[item.item_group].append(item) %}
+            {% else %}
+            {% set _ = groups.update({item.item_group: [item]}) %}
+            {% endif %}
+            {% endfor %}
+
+            {% for group, items in groups.items() %}
+            {% if items|length > 10 %}
+            <!-- Split into two tables if items are more than 10 -->
+            <div class="item-section full-width">
+                <span class="group-name">{{ group }}</span>
+                <div style="display: flex; gap: 20px;">
+                    <!-- First Half of the Table -->
+                    <table style="flex: 1;">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Rate</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items[:5] %}
+                            <tr>
+                                <td>{{ item.item_name }}</td>
+                                <td>{{ item.qty }}</td>
+                                <td>{{ item.rate }}</td>
+                                <td>{{ item.amount }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <!-- Second Half of the Table -->
+                    <table style="flex: 1;">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Rate</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items[5:] %}
+                            <tr>
+                                <td>{{ item.item_name }}</td>
+                                <td>{{ item.qty }}</td>
+                                <td>{{ item.rate }}</td>
+                                <td>{{ item.amount }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% else %}
+            <!-- Normal table with fewer than 10 items -->
+            <div class="item-section">
+                <span class="group-name">{{ group }}</span>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Rate</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.item_name }}</td>
+                            <td>{{ item.qty }}</td>
+                            <td>{{ item.rate }}</td>
+                            <td>{{ item.amount }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+    <!-- Summary Section -->
+    <div class="summary">
+        <div class="left-column">
+            <p><strong>Total Quantity:</strong> {{ doc.total_qty }}</p>
+            <p><strong>Amount Eligible for Commission:</strong> {{ doc.amount_eligible_for_commission }} د.ع</p>
+        </div>
+        <div class="right-column">
+            <p><strong>Total:</strong> {{ doc.total }} د.ع</p>
+            <p><strong>Grand Total:</strong> <strong>{{ doc.grand_total }} د.ع</strong></p>
+            <p><strong>Rounded Total:</strong> {{ doc.rounded_total }} د.ع</p>
+            <p><strong>In Words:</strong> {{ doc.in_words }}</p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>تكالیف علاج الاطفال دون سن الخامسة عشرة تم دفعھا كاملة من قبل العتبة الحسینیة المقدسة</p>
+        <img src="your footer path" alt="Footer Logo">
+    </div>
+
+</body>
+
+</html>

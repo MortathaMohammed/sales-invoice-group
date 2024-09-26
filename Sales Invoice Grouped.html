@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<!-- Header -->
+<div class="header">
+    <img src="your header path" alt="Header Logo">
+</div>
+
+<!-- Content Section -->
+<div class="content">
+
+    <!-- Invoice Info -->
+    <div class="info">
+        <p><strong>Customer Name:</strong> {{ doc.customer_name }}</p>
+        <p><strong>Invoice Date:</strong> {{ doc.posting_date }}</p>
+        <p><strong>Invoice Number:</strong> {{ doc.name }}</p>
+        <p><strong>Due Date:</strong> {{ doc.due_date }}</p>
+    </div>
+
+    <!-- Sales Invoice Items Grouped by Item Group -->
+    <table>
+        <thead>
+            <tr>
+                <th>Item Group</th>
+                <th>Total Quantity</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set groups = {} %}
+            {% for item in doc.items %}
+            {% set group = groups[item.item_group] if item.item_group in groups else {'qty': 0, 'amount': 0} %}
+            {% set group = {'qty': group.qty + item.qty, 'amount': group.amount + item.amount} %}
+            {% set _ = groups.update({item.item_group: group}) %}
+            {% endfor %}
+
+            {% for group, data in groups.items() %}
+            <tr>
+                <td>{{ group }}</td>
+                <td>{{ data.qty }}</td>
+                <td>{{ data.amount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Summary Section -->
+<div class="summary">
+    <div class="left-column">
+        <p><strong>Total Quantity:</strong> {{ doc.total_qty }}</p>
+        <p><strong>Amount Eligible for Commission:</strong> {{ doc.amount_eligible_for_commission }} د.ع</p>
+    </div>
+    <div class="right-column">
+        <p><strong>Total:</strong> {{ doc.total }} د.ع</p>
+        <p><strong>Grand Total:</strong> <strong>{{ doc.grand_total }} د.ع</strong></p>
+        <p><strong>Rounded Total:</strong> {{ doc.rounded_total }} د.ع</p>
+        <p><strong>In Words:</strong> {{ doc.in_words }}</p>
+    </div>
+</div>
+</div>
+
+<div class="footer">
+    <p>تكالیف علاج الاطفال دون سن الخامسة عشرة تم دفعھا كاملة من قبل العتبة الحسینیة المقدسة</p>
+    <img src="your footer path" alt="Footer Logo">
+</div>
+
+</body>
+
+</html>
